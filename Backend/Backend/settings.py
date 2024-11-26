@@ -20,7 +20,6 @@ INSTALLED_APPS = [
     'drf_yasg',
 ]
 
-
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -60,7 +59,7 @@ DATABASES = {
         'HOST':'localhost',
         'PORT':'5432',
     },
-    'secondary':{
+    'secondary_db':{
         'ENGINE':'django.db.backends.postgresql',
         'NAME':'secondary_db',
         'USER':'postgres',
@@ -70,16 +69,15 @@ DATABASES = {
     }
 }
 
-DATABASE_ROUTERS = ['api.router.SecondaryDatabaseRouter']
-
-
+DATABASE_ROUTERS = [
+    'api.router.SecondaryDatabaseRouter',
+    'api.auth_router.AuthRouter',
+    ]
 
 
 CRONJOBS = [
     ('0 0 * * *', 'api.tasks.extract_data_daily')
 ]
-
-
 
 AUTH_PASSWORD_VALIDATORS = [
     {
